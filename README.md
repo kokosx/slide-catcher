@@ -43,6 +43,8 @@ Na macOS `npm run build` tworzy `SlideCatcher.app` i `.dmg` w `src-tauri/target/
 
 Bez niego macOS zwraca zrzuty z samą tapetą. Przy pierwszym uruchomieniu aplikacja pokaże żółty pasek z przyciskiem **Nadaj uprawnienie**, który otwiera *Ustawienia systemowe → Prywatność i ochrona → Nagrywanie ekranu i dźwięku*. Włącz tam SlideCatcher (w trybie `npm run dev` będzie to raczej Terminal lub Twój edytor) i **uruchom aplikację ponownie**.
 
+Jeśli mimo włączonego przełącznika aplikacja dalej pokazuje brak uprawnienia: zamknij SlideCatcher, w *Nagrywanie ekranu i dźwięku* usuń wpis SlideCatcher przyciskiem **−**, uruchom aplikację, nadaj uprawnienie od nowa i uruchom ją ponownie. Każda nowa wersja aplikacji (podpis ad-hoc) wymaga takiego ponownego nadania.
+
 Wymaga macOS 12.3 lub nowszego.
 
 ### Linux
