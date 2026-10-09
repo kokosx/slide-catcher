@@ -15,7 +15,19 @@ Działa na macOS (priorytet), Windows i Linuksie. Tauri 2 + Rust, bez żadnych z
 
 Przycisk **Zrzut teraz** robi zrzut ręcznie, gdy coś umknęło.
 
-## Uruchomienie
+## Pobranie gotowej aplikacji
+
+Gotowe pliki są w zakładce **Releases**: `.dmg` na macOS (Apple Silicon i Intel) i `.exe` na Windows.
+
+Aplikacja nie jest podpisana certyfikatem Apple, więc macOS przy pierwszym otwarciu ją zablokuje. Po przeciągnięciu do Aplikacji uruchom raz w Terminalu:
+
+```bash
+xattr -cr /Applications/SlideCatcher.app
+```
+
+Na Windows SmartScreen może pokazać ostrzeżenie: kliknij „Więcej informacji” → „Uruchom mimo to”.
+
+## Budowanie ze źródeł
 
 Potrzebne: [Rust](https://rustup.rs) i Node.js 18+.
 

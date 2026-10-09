@@ -5,6 +5,9 @@ on:
     tags: ["v*"]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     strategy:
@@ -38,7 +41,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tagName: ${{ github.ref_name }}
-          releaseName: SlideCatcher ${{ github.ref_name }}
-          releaseDraft: true
+          tagName: v__VERSION__
+          releaseName: SlideCatcher v__VERSION__
+          releaseBody: Pobierz plik .dmg (macOS) albo .exe (Windows) z listy poniżej.
+          releaseDraft: false
           args: ${{ matrix.args }}
