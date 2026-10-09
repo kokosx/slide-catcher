@@ -29,6 +29,22 @@ pub fn request() -> &'static str {
     "denied"
 }
 
+/// Usuwa zapamiętaną (np. nieaktualną po aktualizacji aplikacji) decyzję o nagrywaniu ekranu
+/// i od razu prosi o nią ponownie. Pomaga, gdy w Ustawieniach przełącznik jest włączony,
+/// a macOS i tak odmawia, bo wpis dotyczy starszej kopii aplikacji.
+#[cfg(target_os = "macos")]
+pub fn reset(bundle_id: &str) -> &'static str {
+    let _ = std::process::Command::new("tccutil")
+        .args(["reset", "ScreenCapture", bundle_id])
+        .status();
+    request()
+}
+
+#[cfg(not(target_os = "macos"))]
+pub fn reset(_bundle_id: &str) -> &'static str {
+    "not-needed"
+}
+
 #[cfg(not(target_os = "macos"))]
 pub fn status() -> &'static str {
     "not-needed"

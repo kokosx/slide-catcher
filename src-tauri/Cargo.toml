@@ -1,6 +1,6 @@
 [package]
 name = "slide-catcher"
-version = "0.1.0"
+version = "0.1.1"
 description = "Automatycznie łapie slajdy z udostępnionego ekranu i składa je w prezentację"
 edition = "2021"
 

@@ -460,6 +460,11 @@ fn request_screen_permission() -> &'static str {
     permission::request()
 }
 
+#[tauri::command]
+fn reset_screen_permission(app: AppHandle) -> &'static str {
+    permission::reset(&app.config().identifier)
+}
+
 fn default_base_dir() -> PathBuf {
     dirs::picture_dir()
         .or_else(dirs::home_dir)
@@ -493,6 +498,7 @@ pub fn run() {
             open_folder,
             screen_permission,
             request_screen_permission,
+            reset_screen_permission,
         ])
         .run(tauri::generate_context!())
         .expect("błąd uruchamiania aplikacji");

@@ -264,9 +264,24 @@ $("clear-region").addEventListener("click", () => { region = null; drawRegion();
 for (const id of ["threshold", "settle", "interval"]) $(id).addEventListener("input", () => { renderLabels(); saveSettings(); });
 $("skip-repeats").addEventListener("change", saveSettings);
 
+async function checkPermission() {
+  await checkPermission();
+  return perm;
+}
 $("perm-btn").addEventListener("click", async () => {
   const s = await invoke("request_screen_permission");
   if (s === "granted") $("perm-banner").hidden = true;
+});
+$("perm-check").addEventListener("click", async () => {
+  if ((await checkPermission()) === "denied") {
+    setStatus("error", "Nadal brak uprawnienia. Zamknij aplikację (⌘Q) i otwórz ponownie.");
+  } else {
+    loadPreview();
+  }
+});
+$("perm-reset").addEventListener("click", async () => {
+  await invoke("reset_screen_permission");
+  setStatus("", "Wyczyściłem stary wpis. Włącz SlideCatcher w Ustawieniach, potem ⌘Q i otwórz ponownie.");
 });
 
 // ------------------------------------------------------------ zdarzenia z backendu
@@ -285,8 +300,7 @@ listen("status", (e) => {
   renderLabels();
   setupRegionSelection();
   $("outdir").value = await invoke("get_output_dir");
-  const perm = await invoke("screen_permission");
-  $("perm-banner").hidden = perm !== "denied";
+  await checkPermission();
   await loadSources(saved.sourceKey);
   if (saved.region && saved.sourceKey === JSON.stringify(currentSource())) {
     region = saved.region;
