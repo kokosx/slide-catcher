@@ -1,0 +1,134 @@
+:root {
+  --bg: #f4f5f7;
+  --panel: #ffffff;
+  --text: #1c1f24;
+  --muted: #6b7280;
+  --border: #e3e5e8;
+  --accent: #2563eb;
+  --accent-text: #ffffff;
+  --danger: #dc2626;
+  --warn-bg: #fff4d6;
+  --warn-text: #7a4d00;
+  --stage: #1f2329;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #15171a;
+    --panel: #1d2024;
+    --text: #e8eaed;
+    --muted: #9aa0a6;
+    --border: #2e3238;
+    --accent: #4f8cff;
+    --warn-bg: #3a2f12;
+    --warn-text: #ffd479;
+    --stage: #0d0f11;
+  }
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { margin: 0; height: 100%; }
+body {
+  font: 14px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+}
+
+.banner {
+  background: var(--warn-bg);
+  color: var(--warn-text);
+  padding: 10px 16px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+main {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  grid-template-rows: 1fr 230px;
+  gap: 12px;
+  padding: 12px;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+}
+aside { grid-row: 1 / span 2; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+h1 { font-size: 18px; margin: 0; }
+h2 { font-size: 15px; margin: 0; }
+h2 span { color: var(--muted); font-weight: normal; }
+
+label { display: flex; flex-direction: column; gap: 4px; }
+label.check { flex-direction: row; align-items: center; gap: 8px; }
+small { color: var(--muted); font-size: 12px; }
+fieldset { border: 1px solid var(--border); border-radius: 8px; padding: 10px; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+legend { color: var(--muted); padding: 0 4px; }
+
+.row { display: flex; gap: 6px; align-items: center; }
+.row > select, .row > input { flex: 1; min-width: 0; }
+
+select, input[type=text], button {
+  font: inherit;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 10px;
+}
+button { cursor: pointer; }
+button:disabled { opacity: .5; cursor: default; }
+button.icon { padding: 6px 9px; }
+button.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-text); }
+button.danger { background: var(--danger); border-color: var(--danger); color: #fff; }
+button.link { background: none; border: none; color: var(--accent); padding: 2px 4px; }
+input[type=range] { width: 100%; accent-color: var(--accent); }
+
+.actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.actions button { padding: 10px; font-weight: 600; }
+.status { margin: 0; color: var(--muted); min-height: 2.8em; }
+.status.watching { color: #16a34a; }
+.status.moving { color: #d97706; }
+.status.error { color: var(--danger); }
+
+.stage { display: flex; flex-direction: column; gap: 6px; min-height: 0; }
+.stage-head { display: flex; justify-content: space-between; color: var(--muted); font-size: 12px; gap: 8px; }
+.preview-wrap {
+  flex: 1;
+  min-height: 0;
+  background: var(--stage);
+  border-radius: 10px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: crosshair;
+}
+.preview-wrap img { max-width: 100%; max-height: 100%; display: block; }
+.region {
+  position: absolute;
+  border: 2px solid #22c55e;
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, .45);
+  pointer-events: none;
+}
+.empty { color: #9aa0a6; position: absolute; }
+
+.slides { display: flex; flex-direction: column; gap: 10px; min-height: 0; }
+.slides-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+#slide-list { list-style: none; margin: 0; padding: 0 0 4px; display: flex; gap: 10px; overflow-x: auto; flex: 1; }
+#slide-list li { position: relative; flex: none; }
+#slide-list img { height: 140px; border-radius: 6px; border: 1px solid var(--border); display: block; }
+#slide-list .num { position: absolute; left: 6px; top: 6px; background: rgba(0,0,0,.65); color: #fff; font-size: 11px; padding: 1px 6px; border-radius: 4px; }
+#slide-list .tools { position: absolute; right: 4px; top: 4px; display: none; gap: 3px; }
+#slide-list li:hover .tools { display: flex; }
+#slide-list .tools button { padding: 2px 7px; background: rgba(0,0,0,.65); color: #fff; border: none; font-size: 12px; }

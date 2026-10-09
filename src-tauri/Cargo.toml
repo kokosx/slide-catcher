@@ -1,0 +1,24 @@
+[package]
+name = "slide-catcher"
+version = "0.1.0"
+description = "Automatycznie łapie slajdy z udostępnionego ekranu i składa je w prezentację"
+edition = "2021"
+
+[lib]
+name = "slide_catcher_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-opener = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+xcap = "0.9"
+image = { version = "0.25", default-features = false, features = ["png", "jpeg"] }
+zip = { version = "2", default-features = false, features = ["deflate"] }
+base64 = "0.22"
+chrono = "0.4"
+dirs = "6"

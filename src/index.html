@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SlideCatcher</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="perm-banner" class="banner" hidden>
+    <span>macOS nie pozwala jeszcze tej aplikacji nagrywać ekranu, więc zrzuty będą puste.</span>
+    <button id="perm-btn">Nadaj uprawnienie</button>
+    <small>Po włączeniu w Ustawieniach uruchom aplikację ponownie.</small>
+  </div>
+
+  <main>
+    <aside class="panel">
+      <h1>SlideCatcher</h1>
+
+      <label>Co obserwować
+        <div class="row">
+          <select id="source"></select>
+          <button id="refresh" class="icon" title="Odśwież listę">⟳</button>
+        </div>
+      </label>
+
+      <fieldset>
+        <legend>Czułość</legend>
+        <label>Próg zmiany: <b id="threshold-val"></b>
+          <input id="threshold" type="range" min="0.2" max="10" step="0.1" value="1.0" />
+          <small>Niżej = łapie też drobne zmiany (np. pojawiający się punkt). Wyżej = tylko wyraźna zmiana slajdu.</small>
+        </label>
+        <label>Odczekaj po zmianie: <b id="settle-val"></b>
+          <input id="settle" type="range" min="0.3" max="5" step="0.1" value="1.2" />
+          <small>Czas bez ruchu, zanim zrobię zrzut. Chroni przed łapaniem animacji i przejść.</small>
+        </label>
+        <label>Sprawdzaj co: <b id="interval-val"></b>
+          <input id="interval" type="range" min="200" max="2000" step="100" value="500" />
+        </label>
+        <label class="check"><input id="skip-repeats" type="checkbox" checked /> Pomijaj slajdy, które już były</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Folder zapisu</legend>
+        <div class="row">
+          <input id="outdir" type="text" spellcheck="false" />
+          <button id="outdir-set" class="icon" title="Ustaw">✓</button>
+        </div>
+        <button id="open-folder" class="link">Otwórz folder sesji</button>
+      </fieldset>
+
+      <div class="actions">
+        <button id="start" class="primary">▶ Start</button>
+        <button id="stop" class="danger" hidden>■ Stop</button>
+        <button id="snap">📸 Zrzut teraz</button>
+      </div>
+      <p id="status" class="status">Gotowy</p>
+    </aside>
+
+    <section class="stage">
+      <div class="stage-head">
+        <span>Podgląd. Przeciągnij myszą, aby zaznaczyć sam slajd (bez kafelków z kamerami).</span>
+        <span>
+          <button id="clear-region" class="link" hidden>Wyczyść zaznaczenie</button>
+          <button id="reload-preview" class="link">Odśwież podgląd</button>
+        </span>
+      </div>
+      <div id="preview-wrap" class="preview-wrap">
+        <img id="preview" alt="" draggable="false" />
+        <div id="region" class="region" hidden></div>
+        <p id="preview-empty" class="empty">Wybierz monitor lub okno</p>
+      </div>
+    </section>
+
+    <section class="slides panel">
+      <div class="slides-head">
+        <h2>Slajdy <span id="count">0</span></h2>
+        <div class="row">
+          <button id="export-pdf" class="primary">Eksport PDF</button>
+          <button id="export-pptx" class="primary">Eksport PPTX</button>
+          <button id="new-session" class="link" title="Zacznij od zera, pliki zostają na dysku">Nowa sesja</button>
+        </div>
+      </div>
+      <ol id="slide-list"></ol>
+    </section>
+  </main>
+
+  <script src="main.js"></script>
+</body>
+</html>
